@@ -1,14 +1,10 @@
-version: '3.8'
-
 services:
   producer:
-    build: ./producer
-    depends_on:
-      - kafka
-    restart: on-failure      # Retry if Kafka isn't ready yet
+    image: kafka-producer:${BUILD_NUMBER}
+    network_mode: host
+    restart: on-failure
 
   consumer:
-    build: ./consumer
-    depends_on:
-      - kafka
+    image: kafka-consumer:${BUILD_NUMBER}
+    network_mode: host
     restart: on-failure
